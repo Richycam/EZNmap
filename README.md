@@ -1,2 +1,4 @@
 # EZNmap
-Make Nmap easier
+usage
+
+    python3 EZNmap.py
