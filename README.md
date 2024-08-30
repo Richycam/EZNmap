@@ -1,4 +1,4 @@
 # EZNmap
-usage
+usage 
 
     python3 EZNmap.py
