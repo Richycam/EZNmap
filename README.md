@@ -1,0 +1,2 @@
+# EZNmap
+Make Nmap easier
