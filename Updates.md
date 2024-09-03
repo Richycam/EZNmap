@@ -2,6 +2,10 @@
 ## Inital commit, (nothing special)
 # 1.1
 ## Experimental features added
-//     NOTICE  Update: 1.1 added expermintal features   
-//     NOTICE  Added : net socket sending, listener and other tools
-//     NOTICE  Requirements for other tools : Metasploit-framework, dirb, 
+NOTICE  Update: 1.1 added expermintal features   
+
+
+NOTICE  Added : net socket sending, listener and other tools
+
+
+Requirements for other tools : Metasploit-framework, dirb, 
