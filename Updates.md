@@ -2,4 +2,6 @@
 ## Inital commit, (nothing special)
 # 1.1
 ## Experimental features added
-    these only work on linux 
+//     NOTICE  Update: 1.1 added expermintal features   
+//     NOTICE  Added : net socket sending, listener and other tools
+//     NOTICE  Requirements for other tools : Metasploit-framework, dirb, 
