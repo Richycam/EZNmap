@@ -3,7 +3,7 @@ import time
 import os
 import socket
 #//     CREDS   https://github.com/TheNoobiCat code refining 
-#//     NOTICE  Update: 1.1 added expermintal features   
+#//     NOTICE  Update: 1.2 code refined  
 #//     NOTICE  Added : net socket sending, listener and other tools
 #//     NOTICE  Requirements for other tools : Metasploit-framework, dirb, 
 #//     TODO    Add more features ideally bulit into python not from cmd line
