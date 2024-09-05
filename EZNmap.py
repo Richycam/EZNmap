@@ -2,6 +2,7 @@ import sys
 import time
 import os
 import socket
+#//     CREDS   https://github.com/TheNoobiCat code refining 
 #//     NOTICE  Update: 1.1 added expermintal features   
 #//     NOTICE  Added : net socket sending, listener and other tools
 #//     NOTICE  Requirements for other tools : Metasploit-framework, dirb, 
@@ -82,18 +83,10 @@ def clear():
     os.system("clear")
     os.system("cls")
 def start_nmap():
-    clear()
-    print("starting nmap")
-    time.sleep(0.5)
-    clear()
-    print("starting nmap.")
-    time.sleep(0.5)
-    clear()
-    print("starting nmap..")
-    time.sleep(0.5)
-    clear()
-    print("starting nmap...")
-    time.sleep(0.5)
+    for i in range(4):
+        clear()
+        print(f"starting nmap{'.' * i}")
+        time.sleep(0.5)
 def exit():
     sys.exit
 def main():
@@ -104,7 +97,8 @@ def main():
         start_nmap()
         simple_cmd = "nmap {0}".format(ip)
         output_simple = os.system(simple_cmd)
-        print(output_simple) 
+        print(output_simple)
+        exit() 
     elif choose == "2":
         start_nmap()
         simple_cmd = "nmap {0} -A".format(ip)
