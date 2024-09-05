@@ -1,18 +1,15 @@
-import sys 
+import sys
 import time
 import os
 import socket
 
+# //     NOTICE  Update: 1.1 added experimental features   
+# //     NOTICE  Added : net socket sending, listener, and other tools
+# //     NOTICE  Requirements for other tools : Metasploit-framework, dirb, 
 
-#//     NOTICE  Update: 1.1 added expermintal features   
-#//     NOTICE  Added : net socket sending, listener and other tools
-#//     NOTICE  Requirements for other tools : Metasploit-framework, dirb, 
-
-#//     TODO    Add more features ideally bulit into python not from cmd line
-#//     TODO    a way to check if the user has dependanices ?
-#//     TODO    make code look more neat maybe?  
-
-
+# //     TODO    Add more features ideally built into Python not from cmd line
+# //     TODO    a way to check if the user has dependencies?
+# //     TODO    make code look neater maybe?  
 
 Banner = """
 ############                EZNmap                     ############
@@ -70,7 +67,6 @@ L___________________J
 
 """
 
-
 art4 = """
  ___________________
  | _______________ |
@@ -85,116 +81,100 @@ art4 = """
 |         [_____] []|
 |         [_____] []|
 L___________________J    
-   
-
 """
+
 def clear():
     os.system("clear")
+
 def start_nmap():
-    clear()
-    print("starting nmap")
-    time.sleep(0.5)
-    clear()
-    print("starting nmap.")
-    time.sleep(0.5)
-    clear()
-    print("starting nmap..")
-    time.sleep(0.5)
-    clear()
-    print("starting nmap...")
-    time.sleep(0.5)
+    for i in range(4):
+        clear()
+        print(f"starting nmap{'.' * i}")
+        time.sleep(0.5)
 
 def exit():
-    sys.exit
+    sys.exit()
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-def sock_connect(): 
-    sock
+
+def sock_connect(host, port): 
+    sock.connect((host, int(port)))
     time.sleep(3)
-    call
+
 clear()
 time.sleep(1)
-print(art1)
-time.sleep(1)
-clear()
-print(art2)
-time.sleep(1)
-clear()
-print(art3)
-time.sleep(1)
-clear()
-print(art4)
-time.sleep(2)
-clear()
+for art in [art1, art2, art3, art4]:
+    print(art)
+    time.sleep(1)
+    clear()
 print(Banner)
+
 ip = input("IP Address to scan? \n")
 clear()
 print("scan type?")
 print("1) Simple scan")
-print("2) Version Detctor")
-print("3) Vulnrabillity Scan")
+print("2) Version Detector")
+print("3) Vulnerability Scan")
 print("4) Stealth Scan")
 print("5) Scan for all hosts on subnet")
-print("6) send a net socket (expermintal)")
-print("7) start a listener port (expermintal)")
-print("8) Other tools (expermintal (Linux only) ")
+print("6) Send a net socket (experimental)")
+print("7) Start a listener port (experimental)")
+print("8) Other tools (experimental, Linux only)")
+
 choose = input("Choose scan type \n")
-if choose == "1":
-    start_nmap()
-    simple_cmd = "nmap {0}".format(ip)   
-    output_simple = os.system(simple_cmd)
-    print(output_simple)
-    exit()
-if choose == "2":
-    start_nmap()
-    simple_cmd = "nmap {0} -A".format(ip)
-    output_simple = os.system(simple_cmd)
-    print(output_simple)
-    exit()
-if choose == "3":
-    start_nmap()
-    simple_cmd = "nmap {0} -A --script=vuln ".format(ip)
-    output_simple = os.system(simple_cmd)
-    print(output_simple)
-    exit()
-if choose == "4":
-    start_nmap()
-    simple_cmd = "sudo nmap {0} -sS ".format(ip)
-    output_simple = os.system(simple_cmd)
-    print(output_simple)
-    exit()
-if choose == "5":
-    start_nmap()
-    simple_cmd = "nmap {0}/24 -n -sP ".format(ip)  
-    output_simple = os.system(simple_cmd)
-    print(output_simple)
-    exit()
-if choose == "6":
-    clear()   
-    host = ip
-    port = input("what port? \n")
-    call = sock.connect((host,port))
-    sock_connect()
-if choose == "7":
-    clear()
-    port =input("port to run listner on? \n")
-    cmd_nc = "nc -lvnp {0} {1}".format(ip,port)
-    clear()
-    cmd_nc1 = os.system(cmd_nc)
-    print(cmd_nc1)
-if choose == "8":
-    print("1) start Metasploit")
-    print("2) run a web crawler")
-    tools = input("Choose tool \n")
-    clear()    
-    if tools == "1":
+
+match choose:
+    case "1":
+        start_nmap()
+        simple_cmd = f"nmap {ip}"   
+        output_simple = os.system(simple_cmd)
+        print(output_simple)
+        exit()
+    case "2":
+        start_nmap()
+        simple_cmd = f"nmap {ip} -A"
+        output_simple = os.system(simple_cmd)
+        print(output_simple)
+        exit()
+    case "3":
+        start_nmap()
+        simple_cmd = f"nmap {ip} -A --script=vuln"
+        output_simple = os.system(simple_cmd)
+        print(output_simple)
+        exit()
+    case "4":
+        start_nmap()
+        simple_cmd = f"sudo nmap {ip} -sS"
+        output_simple = os.system(simple_cmd)
+        print(output_simple)
+        exit()
+    case "5":
+        start_nmap()
+        simple_cmd = f"nmap {ip}/24 -n -sP"
+        output_simple = os.system(simple_cmd)
+        print(output_simple)
+        exit()
+    case "6":
         clear()
-        os.system("msfconsole")
-    if tools == "2":
+        port = input("What port? \n")
+        sock_connect(ip, port)
+    case "7":
         clear()
-        wordlist = input("Wordlist file location? \n")
-        word_list_cmd = "dirb {0} {1}".format(ip,wordlist)
-        os.system(word_list_cmd)
-
-
-
+        port = input("Port to run listener on? \n")
+        cmd_nc = f"nc -lvnp {ip} {port}"
+        clear()
+        cmd_nc1 = os.system(cmd_nc)
+        print(cmd_nc1)
+    case "8":
+        print("1) Start Metasploit")
+        print("2) Run a web crawler")
+        tools = input("Choose tool \n")
+        clear()    
+        if tools == "1":
+            clear()
+            os.system("msfconsole")
+        elif tools == "2":
+            clear()
+            wordlist = input("Wordlist file location? \n")
+            word_list_cmd = f"dirb {ip} {wordlist}"
+            os.system(word_list_cmd)
