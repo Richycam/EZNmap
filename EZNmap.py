@@ -2,42 +2,41 @@ import sys
 import time
 import os
 
+
+class ip_inpt:
+    def __init__(self,ip_add):
+        self.ip_add = ip_add
+    
+
+
 Banner = """
-############                EZNmap                     ############
-############           --for lazy hackers--            ############
-############        https://github.com/Richycam        ############
+\|\|\|\|        https://github.com/Richycam        \|\|\|\|
 """
+
 art1 = """
  | |   EZNmap    | |
  | |             | |
- | |x           x| |
+ | |  RichyCam   | |
  | |             | |
  | |             | |
 """
 art2 = """
  | |   EZNmap    | |
  | |             | |
- | |X  X     X  X| |
- | |             | |
- | |             | |
-"""
-
-art3 = """
- | |   EZNmap    | |
- | |             | |
- | |  RichyCam   | |
- | |             | |
- | |             | |
-"""
-art4 = """
- | |  EZNmap 1.1 | |
- | |             | |
  | |  RichyCam   | |
  | |             | |
  | | Github.com  | |
 """
+
+
+def flow_cntrl():
+    back = input("\n go back? Y/N? \n ").lower
+    if back == "y":
+        clear()
+
+
 def clear():
-    os.system("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
 def start_nmap():
     for i in range(4):
         clear()
@@ -46,12 +45,17 @@ def start_nmap():
 def exit():
     sys.exit
 
-
-
+def get_ip():
+    ip_inpt.ip_add = input("Ip address or URL? \n")
 
 def menu():
     print(""" 
-                    EZNmap                      
+     ___________   _   __                    
+   / ____/__  /  / | / /___ ___  ____ _____ 
+  / __/    / /  /  |/ / __ `__ \/ __ `/ __  |
+ / /___   / /__/ /|  / / / / / / /_/ / /_/ /
+/_____/  /____/_/ |_/_/ /_/ /_/\__,_/ .___/ 
+                                   /_/                   
     ------------------------------------------------
     scan type?
     1) Simple scan
@@ -60,63 +64,75 @@ def menu():
     4) Stealth Scan
     5) Scan for all hosts on subnet
     7) start a listener port (expermintal)
-    8) Other tools (expermintal )
+    8) Other tools (expermintal)
     ------------------------------------------------
     """)
-
 
 
 def opt_1():
     clear()
     start_nmap()
-    simple_cmd = "nmap {0}".format(ip)
+    get_ip()
+    simple_cmd = "nmap {0}".format(ip_inpt.ip_add)
     output_simple = os.system(simple_cmd)
     print(output_simple)
-
-
+    flow_cntrl()
+    clear()
 
 def opt_2(): 
     clear()
     start_nmap()
-    simple_cmd = "nmap {0} -A".format(ip)
+    get_ip()
+    simple_cmd = "nmap {0} -A".format(ip_inpt.ip_add)
     output_simple = os.system(simple_cmd)
     print(output_simple)
-    
+    flow_cntrl
+    clear()
 def opt_3():
     clear()
     start_nmap()
-    simple_cmd = "nmap {0} -A".format(ip)
+    get_ip()
+    simple_cmd = "nmap {0} -A".format(ip_inpt.ip_add)
     output_simple = os.system(simple_cmd)
     print(output_simple)
-    
+    flow_cntrl()
+    clear()
 def opt_4():
     clear()
     start_nmap()
-    simple_cmd = "nmap {0} -A --script=vuln ".format(ip)
+    get_ip()
+    simple_cmd = "nmap {0} -A --script=vuln ".format(ip_inpt.ip_add)
     output_simple = os.system(simple_cmd)
     print(output_simple)
-    
+    flow_cntrl()
+    clear()
 def opt_5():
     start_nmap()
-    simple_cmd = "sudo nmap {0} -sS ".format(ip)
+    get_ip()
+    simple_cmd = "sudo nmap {0} -sS ".format(ip_inpt.ip_add)
     output_simple = os.system(simple_cmd)
     print(output_simple)
-    
+    flow_cntrl()
+    clear()
 def opt_6():
     start_nmap()
-    simple_cmd = "nmap {0}/24 -n -sP ".format(ip)  
+    get_ip()
+    simple_cmd = "nmap {0}/24 -n -sP ".format(ip_inpt.ip_add)  
     output_simple = os.system(simple_cmd)
     print(output_simple)
-
+    flow_cntrl()
+    clear()
    
 def opt_7():
     clear()
+    get_ip()
     port = input("port to run listner on? \n") 
-    cmd_nc = "nc -lvnp {0} {1}".format(ip,port)
+    cmd_nc = "nc -lvnp {0} {1}".format(ip_inpt.ip_add,port)
     clear()
     cmd_nc1 = os.system(cmd_nc)
     print(cmd_nc1)
-    
+    flow_cntrl()
+    clear()
 def opt_8():
     print("1) start Metasploit")
     print("2) run a web crawler")
@@ -127,12 +143,15 @@ def opt_8():
         os.system("msfconsole")
     elif tools == "2":
         clear()
+        get_ip()
         wordlist = input("Wordlist file location? \n EZNMAP> ")
-        word_list_cmd = "dirb {0} {1}".format(ip,wordlist)
+        word_list_cmd = "dirb {0} {1}".format(ip_inpt.ip_add,wordlist)
         os.system(word_list_cmd)
+    else: 
+        flow_cntrl()
+        clear()
 
-
-list = [art1, art2, art3, art4]
+list = [art1, art2,]
 for art in list:
     print(art)
     time.sleep(0.7)
@@ -159,6 +178,7 @@ def main():
             opt_7()
         case "8":
             opt_8()
+
 
 runtime_loop = True
 while runtime_loop:
